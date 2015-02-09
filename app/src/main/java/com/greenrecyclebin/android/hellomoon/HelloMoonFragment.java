@@ -26,15 +26,28 @@ public class HelloMoonFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 player.play(getActivity());
+
+                playButton.setEnabled(false);
+                stopButton.setEnabled(true);
+
+                playButton.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        playButton.setEnabled(true);
+                    }
+                }, 5000);
             }
         });
 
         stopButton = (Button) v.findViewById(R.id.hellomoon_stopButton);
+        stopButton.setEnabled(false);
 
         stopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 player.stop();
+                playButton.setEnabled(true);
+                stopButton.setEnabled(false);
             }
         });
 
