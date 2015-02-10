@@ -10,6 +10,12 @@
         android:scaleType="centerInside"
         android:src="@drawable/armstrong_on_moon" />
 
+    <VideoView
+        android:id="@+id/hellomoon_videoView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
     <TableRow
         android:layout_weight="0"
         android:gravity="center|bottom">
