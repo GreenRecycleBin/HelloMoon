@@ -14,6 +14,7 @@ import android.widget.Button;
 public class HelloMoonFragment extends Fragment {
     private AudioPlayer player = new AudioPlayer();
     private Button playButton;
+    private Button pauseButton;
     private Button stopButton;
 
     @Override
@@ -28,14 +29,22 @@ public class HelloMoonFragment extends Fragment {
                 player.play(getActivity());
 
                 playButton.setEnabled(false);
+                pauseButton.setEnabled(true);
                 stopButton.setEnabled(true);
+            }
+        });
 
-                playButton.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        playButton.setEnabled(true);
-                    }
-                }, 5000);
+        pauseButton = (Button) v.findViewById(R.id.hellomoon_pauseButton);
+        pauseButton.setEnabled(false);
+
+        pauseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                player.pause();
+
+                playButton.setEnabled(true);
+                pauseButton.setEnabled(false);
+                stopButton.setEnabled(true);
             }
         });
 
@@ -46,7 +55,9 @@ public class HelloMoonFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 player.stop();
+
                 playButton.setEnabled(true);
+                pauseButton.setEnabled(false);
                 stopButton.setEnabled(false);
             }
         });

@@ -8,26 +8,35 @@ import android.media.MediaPlayer;
  */
 public class AudioPlayer {
     private MediaPlayer player;
+    private boolean paused = false;
 
     public void stop() {
         if (player != null) {
             player.release();
             player = null;
+            paused = false;
         }
     }
 
     public void play(Context c) {
-        stop();
+        if (!paused) {
+            player = MediaPlayer.create(c, R.raw.one_small_step);
 
-        player = MediaPlayer.create(c, R.raw.one_small_step);
-
-        player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                stop();
-            }
-        });
+            player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    stop();
+                }
+            });
+        }
 
         player.start();
+    }
+
+    public void pause() {
+        if (player != null) {
+            player.pause();
+            paused = true;
+        }
     }
 }
